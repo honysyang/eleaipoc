@@ -87,6 +87,8 @@ python eleaipoc.py --poc llama.cpp --ip 127.0.0.1 --port 8000 --output output/
 plaintext'''
 (eleaipoc) root@uweic:/home/workspace/pysectool/eleaipoc# python eleaipoc.py --poc ray  --ip 127.0.0.1 --port 8265
 
+```
+
 ================================================================================
   _____  _____      _____    ____    _____  _____    ____      ____  
  / ___/ (_   _)    / ___/   (    )  (_   _)(  __ \  / __ \    / ___) 
@@ -106,6 +108,7 @@ Submitted job ID: raysubmit_LUPspvi8ekxhfU8X
 
 检测结果:发现当前Ray框架存在漏洞风险
 结果已保存到指定文件: output/ray_20250705000017.html
+```
 '''
 
 ## 声明
