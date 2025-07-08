@@ -108,7 +108,7 @@ Submitted job ID: raysubmit_LUPspvi8ekxhfU8X
 检测结果:发现当前Ray框架存在漏洞风险
 结果已保存到指定文件: output/ray_20250705000017.html
 ```
-
+查看检测结果文件：https://github.com/honysyang/eleaipoc/blob/main/output/all_20250708152652.html
 
 ## 声明
 本工具为AI框架漏洞检测工具的自查版本，仅用于本地测试和安全评估，不得用于非法或未授权的用途。
