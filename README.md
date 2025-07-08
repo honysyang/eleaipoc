@@ -49,12 +49,12 @@ git clone https://github.com/eleaipoc/eleaipoc.git
 
 2. 安装环境
   2.1 自动化脚本安装：
-    windows环境(建议管理员权限运行)
+    - windows环境(建议管理员权限运行)
     ```
     ./install_script.ps1
     ```
 
-    linux环境(建议root权限运行)
+    - linux环境(建议root权限运行)
     ```
     chmod 777 install_script.sh
     ./install_script.sh
@@ -84,8 +84,9 @@ python eleaipoc.py --poc llama.cpp --ip 127.0.0.1 --port 8000 --output output/
 ```
 python eleaipoc.py --poc llama.cpp --ip 127.0.0.1 --port 8000 --output output/
 ```
-plaintext'''
+```
 (eleaipoc) root@uweic:/home/workspace/pysectool/eleaipoc# python eleaipoc.py --poc ray  --ip 127.0.0.1 --port 8265
+```
 
 ```
 
@@ -109,7 +110,7 @@ Submitted job ID: raysubmit_LUPspvi8ekxhfU8X
 检测结果:发现当前Ray框架存在漏洞风险
 结果已保存到指定文件: output/ray_20250705000017.html
 ```
-'''
+
 
 ## 声明
 本工具为AI框架漏洞检测工具的自查版本，仅用于本地测试和安全评估，不得用于非法或未授权的用途。
