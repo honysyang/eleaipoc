@@ -1,0 +1,271 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>电鳗AI检测套装：ray框架安全扫描报告</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        
+        <!-- Tailwind 配置 -->
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: '#165DFF',
+                            secondary: '#69b1ff',
+                            success: '#00b42a',
+                            warning: '#ff7d00',
+                            danger: '#f53f3f',
+                            neutral: '#86909c',
+                            dark: '#1d2129',
+                            light: '#f2f3f5'
+                        },
+                        fontFamily: {
+                            inter: ['Inter', 'system-ui', 'sans-serif'],
+                        },
+                    }
+                }
+            }
+        </script>
+        
+        <style type="text/tailwindcss">
+            @layer utilities {
+                .content-auto {
+                    content-visibility: auto;
+                }
+                .card-shadow {
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+                }
+                .section-title {
+                    @apply text-xl font-bold text-dark mb-4 flex items-center;
+                }
+                .section-card {
+                    @apply bg-white rounded-lg p-6 mb-6 card-shadow transition-all duration-300 hover:shadow-lg;
+                }
+                .result-item {
+                    @apply p-3 rounded-md mb-2 transition-all duration-300 flex items-start;
+                }
+                .badge {
+                    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+                }
+                .progress-bar {
+                    @apply h-2 rounded-full overflow-hidden bg-gray-200;
+                }
+                .progress-value {
+                    @apply h-full transition-all duration-700 ease-out;
+                }
+                .cve-container {
+                    @apply bg-gray-50 rounded-lg p-4 border border-gray-200 font-mono text-sm overflow-x-auto;
+                }
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50 font-inter min-h-screen flex flex-col">
+        <!-- 顶部导航 -->
+        <header class="bg-primary text-white shadow-md">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fa fa-shield text-2xl"></i>
+                    <h1 class="text-2xl font-bold">电鳗AI检测套装：ray框架</h1>
+                </div>
+                <div class="text-sm opacity-80">
+                    <span class="mr-4"><i class="fa fa-calendar-o mr-1"></i> 2025-07-05 14:01:44</span>
+                    <span><i class="fa fa-file-text-o mr-1"></i> 安全扫描报告</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="flex-grow container mx-auto px-4 py-8">
+            <!-- 风险评估 -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fa fa-tachometer text-primary mr-2"></i>
+                    安全风险评估
+                </h2>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">总体安全评分</span>
+                            <span class="font-bold text-xl text-danger">70分</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value bg-danger" style="width: 30%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-neutral mt-1">
+                            <span>安全</span>
+                            <span>警告</span>
+                            <span>高风险</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-danger/5 rounded-lg p-4 border border-danger/20">
+                            <div class="flex items-center mb-2">
+                                <i class="fa fa-arrow-up text-danger mr-2"></i>
+                                <h4 class="font-medium text-danger">高危漏洞</h4>
+                            </div>
+                            <p class="text-dark">2 个</p>
+                            <p class="text-xs text-neutral mt-1">需要立即处理</p>
+                        </div>
+                        
+                        <div class="bg-warning/5 rounded-lg p-4 border border-warning/20">
+                            <div class="flex items-center mb-2">
+                                <i class="fa fa-exclamation-triangle text-warning mr-2"></i>
+                                <h4 class="font-medium text-warning">中危漏洞</h4>
+                            </div>
+                            <p class="text-dark">0 个</p>
+                            <p class="text-xs text-neutral mt-1">需要尽快处理</p>
+                        </div>
+                        
+                        <div class="bg-success/5 rounded-lg p-4 border border-success/20">
+                            <div class="flex items-center mb-2">
+                                <i class="fa fa-check text-success mr-2"></i>
+                                <h4 class="font-medium text-success">低危漏洞</h4>
+                            </div>
+                            <p class="text-dark">0 个</p>
+                            <p class="text-xs text-neutral mt-1">建议处理</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CVE标签 -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fa fa-tags text-primary mr-2"></i>
+                    发现的CVE标签
+                </h2>
+                <div class="cve-container">
+                    ["CVE-2024-57000", "CVE-2023-48022"]
+                </div>
+            </div>
+
+            <!-- 检测结果 -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fa fa-list-alt text-primary mr-2"></i>
+                    检测结果
+                </h2>
+                <div class="space-y-3">
+                    
+                    <div class="result-item bg-danger/5 border-l-4 border-danger">
+                        <i class="fa fa-exclamation-triangle text-danger mt-1 mr-3"></i>
+                        <div class="flex-grow">
+                            <p class="text-dark">检测结果:发现当前Ray框架存在漏洞风险</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- 日志信息 -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fa fa-file-text text-primary mr-2"></i>
+                    日志信息
+                </h2>
+                <div class="space-y-2 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+                    
+                    <div class="p-3 rounded-md bg-white">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium text-dark">
+                                <i class="fa fa-circle-o mr-1"></i>
+                                **** 创建job(检测用例)成功，获得job_id为raysubmit_CXeiEjKAnQAQfjsP。
+
+                            </span>
+                            <span class="text-xs text-neutral opacity-70">
+                                14:01:44
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- 安全建议 -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fa fa-lightbulb-o text-primary mr-2"></i>
+                    安全建议
+                </h2>
+                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <pre class="font-mono text-sm leading-relaxed text-dark whitespace-pre-wrap break-words">安全建议:
+1. 立即启用Ray的认证机制，限制只有授权用户可以提交作业。
+2. 确保Ray集群只在可信的网络环境中运行，避免暴露于公共网络。
+3. 定期更新Ray版本，应用最新的安全补丁。</pre>
+                </div>
+            </div>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="bg-dark text-white py-6">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p class="text-sm opacity-80">安全扫描报告 &copy; 2025 北京模湖智能科技有限责任公司</p>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            <i class="fa fa-shield"></i> 安全中心
+                        </a>
+                        <a href="#" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            <i class="fa fa-question-circle"></i> 帮助
+                        </a>
+                        <a href="#" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            <i class="fa fa-envelope"></i> 联系我们
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- 交互脚本 -->
+        <script>
+            // 页面加载完成后执行
+            document.addEventListener('DOMContentLoaded', function() {
+                // 为结果项添加悬停效果
+                const resultItems = document.querySelectorAll('.result-item');
+                resultItems.forEach(item => {
+                    item.addEventListener('mouseenter', function() {
+                        this.classList.add('shadow-md', 'scale-[1.01]');
+                    });
+                    item.addEventListener('mouseleave', function() {
+                        this.classList.remove('shadow-md', 'scale-[1.01]');
+                    });
+                });
+                
+                // 为卡片添加动画
+                const cards = document.querySelectorAll('.section-card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('opacity-100', 'translate-y-0');
+                        card.classList.remove('opacity-0', 'translate-y-4');
+                    }, 100 * index);
+                });
+                
+                // 添加平滑滚动
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+                
+                // 进度条动画
+                const progressBars = document.querySelectorAll('.progress-value');
+                progressBars.forEach(bar => {
+                    setTimeout(() => {
+                        bar.style.width = bar.parentElement.style.width;
+                    }, 300);
+                });
+            });
+        </script>
+    </body>
+    </html>
+    
