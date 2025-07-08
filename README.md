@@ -43,35 +43,35 @@ v1.0.0
 
 ## 使用方法
 1. 克隆项目
-bash```
+```
 git clone https://github.com/eleaipoc/eleaipoc.git
 ```
 
 2. 安装环境
   2.1 自动化脚本安装：
     windows环境(建议管理员权限运行)
-    bash'''
-    cmd:./install_script.ps1
-    '''
+    ```
+    ./install_script.ps1
+    ```
 
     linux环境(建议root权限运行)
-    bash'''
+    ```
     chmod 777 install_script.sh
     ./install_script.sh
-    '''
+    ```
 
   2.2 手动安装：
-    bash'''
+    ```
     python -m venv venv
     source venv/bin/activate 或 venv\Scripts\activate
     pip install -r requirements.txt
-    '''
+    ```
 
 3. 运行漏洞扫描模块
-bash'''
+```
 source venv/bin/activate 或 venv\Scripts\activate
 python eleaipoc.py --poc llama.cpp --ip 127.0.0.1 --port 8000 --output output/
-'''
+```
 
 ## 参数
 - --poc: 指定要运行的漏洞扫描模块，支持llama.cpp、Ollama、Ray、Vllm、Xinference、Torchserve、all
@@ -81,9 +81,9 @@ python eleaipoc.py --poc llama.cpp --ip 127.0.0.1 --port 8000 --output output/
 
 
 ## 例子
-bash'''
+```
 python eleaipoc.py --poc llama.cpp --ip 127.0.0.1 --port 8000 --output output/
-'''
+```
 plaintext'''
 (eleaipoc) root@uweic:/home/workspace/pysectool/eleaipoc# python eleaipoc.py --poc ray  --ip 127.0.0.1 --port 8265
 
