@@ -1,15 +1,4 @@
-==============================================================================
-  _____  _____      _____    ____    _____  _____    ____      ____  
- / ___/ (_   _)    / ___/   (    )  (_   _)(  __ \  / __ \    / ___) 
-( (__     | |     ( (__     / /\ \    | |   ) )_) )/ /  \ \  / /     
- ) __)    | |      ) __)   ( (__) )   | |  (  ___/( ()  () )( (      
-( (       | |   __( (       )    (    | |   ) )   ( ()  () )( (      
- \ \___ __| |___) )\ \_\___  /  /\  \  _| |__( (     \ \_\__/ /  \ \___  
-  \____\________/  \____\/__(  )__\/_____(/__\     \____/    \____) 
-                                                                                
-============================= 电鳗AI检测套装 ==================================
-                    版权所有：北京模糊智能科技有限责任公司                          
-==============================================================================
+![image](https://github.com/user-attachments/assets/f8704a18-45de-4108-b831-3f150d402801)
 
 
 ## 名称
@@ -47,24 +36,21 @@ git clone https://github.com/eleaipoc/eleaipoc.git
 '''
 
 2. 安装环境
-自动化脚本安装：
-windows环境(建议管理员权限运行)
-bash'''
-cmd:./install_script.ps1
-'''
+  2.1 自动化脚本安装：
+    windows环境(建议管理员权限运行)
+    .\install_script.ps1
 
-linux环境(建议root权限运行)
-bash'''
-chmod 777 install_script.sh
-./install_script.sh
-'''
+    linux环境(建议root权限运行)
+    chmod 777 install_script.sh
+    ./install_script.sh
+   
 
-手动安装：
-bash'''
-python -m venv venv
-source venv/bin/activate 或 venv\Scripts\activate
-pip install -r requirements.txt
-'''
+  2.2 手动安装：
+    bash'''
+    python -m venv venv
+    source venv/bin/activate 或 venv\Scripts\activate
+    pip install -r requirements.txt
+    '''
 
 3. 运行漏洞扫描模块
 bash'''
@@ -83,8 +69,29 @@ python eleaipoc.py --poc llama.cpp --ip 127.0.0.1 --port 8000 --output output/
 bash'''
 python eleaipoc.py --poc llama.cpp --ip 127.0.0.1 --port 8000 --output output/
 '''
-![image](https://github.com/user-attachments/assets/143d45e8-92f9-4a51-a06f-b6853be94dd3)
+plaintext'''
+(eleaipoc) root@uweic:/home/workspace/pysectool/eleaipoc# python eleaipoc.py --poc ray  --ip 127.0.0.1 --port 8265
 
+================================================================================
+  _____  _____      _____    ____    _____  _____    ____      ____  
+ / ___/ (_   _)    / ___/   (    )  (_   _)(  __ \  / __ \    / ___) 
+( (__     | |     ( (__     / /\ \    | |   ) )_) )/ /  \ \  / /     
+ ) __)    | |      ) __)   ( (__) )   | |  (  ___/( ()  () )( (      
+( (       | |   __( (       )    (    | |   ) )   ( ()  () )( (      
+ \ \___ __| |___) )\ \_\___  /  /\  \  _| |__( (     \ \_\__/ /  \ \___  
+  \____\________/  \____\/__(  )__\/_____(/__\     \____/    \____) 
+                                                                                
+============================= 电鳗AI检测套装 =====================================
+                    版权所有：北京模糊智能科技有限责任公司                          
+================================================================================
+2025-07-05 00:00:17,630 INFO dashboard_sdk.py:338 -- Uploading package gcs://_ray_pkg_bfc22502c84e31b5.zip.
+2025-07-05 00:00:17,630 INFO packaging.py:588 -- Creating a file package for local module './'.
+Submitted job ID: raysubmit_LUPspvi8ekxhfU8X
+**** 创建job(检测用例)成功，获得job_id为raysubmit_LUPspvi8ekxhfU8X。
+
+检测结果:发现当前Ray框架存在漏洞风险
+结果已保存到指定文件: output/ray_20250705000017.html
+'''
 
 ## 声明
 本工具为AI框架漏洞检测工具的自查版本，仅用于本地测试和安全评估，不得用于非法或未授权的用途。
