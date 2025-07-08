@@ -49,33 +49,37 @@ git clone https://github.com/honysyang/eleaipoc.git
 cd eleaipoc
 ```
 
-2. 💻 安装环境
-    - windows环境(建议管理员权限运行)
-    ```powershell
-    ./install_script.ps1
-    ```
 
-    - linux环境(建议root权限运行)
-    ```bash
-    chmod 777 install_script.sh
-    ./install_script.sh
-    ```
-    - 手动安装：
-    ```bash
-      # 创建虚拟环境
-      python -m venv venv
-      
-      # 激活虚拟环境
-      # Linux/macOS:
-      source venv/bin/activate
-      # Windows:
-      venv\Scripts\activate
-      
-      # 安装依赖
-      pip install -r requirements.txt
-    ```
 
-3. 🔍运行漏洞扫描模块
+### 2. 💻 安装环境
+根据您的操作系统选择对应安装方式：
+
+#### **Windows（管理员权限）**
+```powershell
+./install_script.ps1
+```
+
+#### **linux环境(建议root权限运行)**
+```bash
+chmod 777 install_script.sh
+./install_script.sh
+```
+#### **手动安装**
+```bash
+# 创建虚拟环境
+python -m venv venv
+      
+# 激活虚拟环境
+# Linux/macOS:
+source venv/bin/activate
+# Windows:
+venv\Scripts\activate
+      
+# 安装依赖
+pip install -r requirements.txt
+```
+
+### 3. 🔍运行漏洞扫描模块
    
 ```bash
 source venv/bin/activate 或 venv\Scripts\activate
