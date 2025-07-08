@@ -44,11 +44,10 @@ v1.0.0
 ## 使用方法
 1. 克隆项目
 ```
-git clone https://github.com/eleaipoc/eleaipoc.git
+git clone https://github.com/honysyang/eleaipoc.git
 ```
 
 2. 安装环境
-  2.1 自动化脚本安装：
     - windows环境(建议管理员权限运行)
     ```
     ./install_script.ps1
@@ -59,8 +58,7 @@ git clone https://github.com/eleaipoc/eleaipoc.git
     chmod 777 install_script.sh
     ./install_script.sh
     ```
-
-  2.2 手动安装：
+    - 手动安装：
     ```
     python -m venv venv
     source venv/bin/activate 或 venv\Scripts\activate
