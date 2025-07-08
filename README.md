@@ -43,9 +43,9 @@ v1.0.0
 
 ## 使用方法
 1. 克隆项目
-bash'''
+bash```
 git clone https://github.com/eleaipoc/eleaipoc.git
-'''
+```
 
 2. 安装环境
   2.1 自动化脚本安装：
