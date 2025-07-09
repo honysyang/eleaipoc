@@ -195,7 +195,8 @@ Submitted job ID: raysubmit_LUPspvi8ekxhfU8X
 
 
 ## 技术交流
-扫描下方二维码，可参与技术讨论、AI创建
+扫描下方二维码，可参与技术讨论、AI创新
+
 ![image](https://github.com/user-attachments/assets/f2703a12-bbff-47ef-8105-89ad0383882a)
 
 
