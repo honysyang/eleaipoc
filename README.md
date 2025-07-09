@@ -194,6 +194,10 @@ Submitted job ID: raysubmit_LUPspvi8ekxhfU8X
 ![image](https://github.com/user-attachments/assets/daca348a-3248-437e-9436-5db18061ebf0)
 
 
+## 技术交流
+扫描下方二维码，可参与技术讨论、AI创建
+![image](https://github.com/user-attachments/assets/f2703a12-bbff-47ef-8105-89ad0383882a)
+
 
 
 
