@@ -200,7 +200,8 @@ Submitted job ID: raysubmit_LUPspvi8ekxhfU8X
 ## 技术交流
 扫描下方二维码，可参与技术讨论、AI创新
 
-![image](https://github.com/user-attachments/assets/f2703a12-bbff-47ef-8105-89ad0383882a)    ![模湖公众号](https://github.com/user-attachments/assets/2749b7bb-5825-459d-be38-8d45005fb4be)
+<img src="https://github.com/user-attachments/assets/f2703a12-bbff-47ef-8105-89ad0383882a" width="400" alt="image">
+<img src="https://github.com/user-attachments/assets/2749b7bb-5825-459d-be38-8d45005fb4be" width="400" alt="模湖公众号">
 
 
 
