@@ -1,0 +1,76 @@
+=== AI框架安全检测日志 20250811_143547 ===
+[2025-08-11 14:35:55] [INFO] [llama.cpp框架安全检测] 尝试建立TCP连接
+    TCP连接: 127.0.0.1:50052
+
+[2025-08-11 14:35:55] [INFO] [llama.cpp框架安全检测] TCP连接结果
+    连接结果: 错误码 111 (0表示成功)
+
+[2025-08-11 14:35:55] [ERROR] [llama.cpp框架安全检测] 端口未开放
+
+[2025-08-11 14:35:55] [WARNING] [llama.cpp框架安全检测] 服务未响应，跳过检测
+
+[2025-08-11 14:35:56] [INFO] [ollama框架安全检测] 发送HEAD请求（检测目标服务是否存在）
+    发起请求连接: HEAD http://127.0.0.1:11434/api/tags
+    请求头内容: {}
+
+[2025-08-11 14:35:56] [INFO] [ollama框架安全检测] 目标服务响应
+    响应状态码: 200
+    响应头内容: {'Content-Type': 'application/json; charset=utf-8', 'Date': 'Mon, 11 Aug 2025 06:35:56 GMT', 'Content-Length': '351'}
+
+[2025-08-11 14:35:56] [INFO] [ollama框架安全检测] 发送GET请求（检测目标API是否存在）
+    发起请求连接: GET http://127.0.0.1:11434/api/tags
+    请求头内容: {}
+
+[2025-08-11 14:35:56] [INFO] [ollama框架安全检测] 服务响应成功
+    响应状态码: 200
+    响应头内容: {'Content-Type': 'application/json; charset=utf-8', 'Date': 'Mon, 11 Aug 2025 06:35:56 GMT', 'Content-Length': '351'}
+    响应内容: {"models":[{"name":"deepseek-r1:1.5b","model":"deepseek-r1:1.5b","modified_at":"2025-05-27T17:01:30.941161874+08:00","size":1117322599,"digest":"a42b25d8c10a841bd24724309898ae851466696a7d7f3a0a408b895538ccbc96","details":{"parent_model":"","format":"gguf","family":"qwen2","families":["qwen2"],"parameter_size":"1.8B","quantization_level":"Q4_K_M"}}]}...
+
+[2025-08-11 14:35:56] [INFO] [ollama框架安全检测] 发送DELETE请求（检测是否存在未授权检测安全风险）
+    发起请求连接: DELETE http://127.0.0.1:11434/api/delete?model=example_model
+    请求头内容: {'Content-Length': '0'}
+
+[2025-08-11 14:35:56] [INFO] [ollama框架安全检测] 服务响应成功，检测完成
+
+[2025-08-11 14:35:56] [INFO] [ollama框架安全检测] 发送GET请求（检测服务版本）
+    发起请求连接: GET http://127.0.0.1:11434/api/version
+    请求头内容: {}
+
+[2025-08-11 14:35:56] [INFO] [ollama框架安全检测] 响应成功，已获得服务版本信息
+    响应状态码: 200
+    响应头内容: {'Content-Type': 'application/json; charset=utf-8', 'Date': 'Mon, 11 Aug 2025 06:35:56 GMT', 'Content-Length': '19'}
+    响应内容: {"version":"0.7.1"}...
+
+[2025-08-11 14:35:57] [INFO] [torchserve框架安全检测] 发送HEAD请求（检测是否存在目标服务）
+    发起请求连接: HEAD http://127.0.0.1:8080/ping
+    请求头内容: {}
+
+[2025-08-11 14:35:57] [ERROR] [torchserve框架安全检测] 未发现目标服务: HTTPConnectionPool(host='127.0.0.1', port=8080): Max retries exceeded with url: /ping (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fd6f34e0920>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+[2025-08-11 14:35:58] [INFO] [ray框架安全检测] 发送GET请求（检测目标服务是否存在）
+    发起请求连接: GET http://127.0.0.1:8265/
+    请求头内容: {}
+
+[2025-08-11 14:35:58] [INFO] [ray框架安全检测] 响应成功，发现存在目标服务
+    响应状态码: 200
+    响应头内容: {'Cache-Control': 'no-cache', 'Content-Type': 'text/html', 'Etag': '"1849b08a61194966-1be"', 'Last-Modified': 'Tue, 17 Jun 2025 01:33:59 GMT', 'Content-Length': '446', 'Accept-Ranges': 'bytes', 'Date': 'Mon, 11 Aug 2025 06:35:58 GMT', 'Server': 'Python/3.10 aiohttp/3.12.2'}
+    响应内容: <!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="shortcut icon" href="./favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Ray Dashboard</title><script defer="defer" src="./static/js/main.1d49c922.js"></script><link href="./static/css/main.388a904b.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>...
+
+[2025-08-11 14:35:58] [INFO] [ray框架安全检测] 提交任务: 1c37199f
+
+[2025-08-11 14:35:58] [INFO] [ray框架安全检测] 任务提交成功 (job_id=raysubmit_ZGTmBsa2g3RdKZQ7)
+
+[2025-08-11 14:35:59] [INFO] [vllm] 尝试TCP连接
+    TCP连接: 127.0.0.1:8000
+
+[2025-08-11 14:35:59] [INFO] [vllm] TCP连接结果
+    连接结果: 错误码 111 (0表示成功)
+
+[2025-08-11 14:35:59] [WARNING] [vllm] 服务未响应，跳过检测
+
+[2025-08-11 14:36:00] [INFO] [xinference框架安全检测] 发送GET请求（检测是否存在目标服务）
+    发起请求连接: GET http://127.0.0.1:9997/status
+    请求头内容: {}
+
+[2025-08-11 14:36:00] [ERROR] [xinference框架安全检测] 不存在目标服务: HTTPConnectionPool(host='127.0.0.1', port=9997): Max retries exceeded with url: /status (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fd6f34e0f50>: Failed to establish a new connection: [Errno 111] Connection refused'))
+

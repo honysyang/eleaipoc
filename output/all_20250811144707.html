@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电鳗AI检测套装：all安全扫描报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#69b1ff',
+                        success: '#00b42a',
+                        warning: '#ff7d00',
+                        danger: '#f53f3f',
+                        neutral: '#86909c',
+                        dark: '#1d2129',
+                        light: '#f2f3f5'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-shadow {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            }
+            .section-title {
+                @apply text-xl font-bold text-dark mb-4 flex items-center;
+            }
+            .section-card {
+                @apply bg-white rounded-lg p-6 mb-6 card-shadow transition-all duration-300 hover:shadow-lg;
+            }
+            .result-item {
+                @apply p-3 rounded-md mb-2 transition-all duration-300 flex items-start;
+            }
+            .badge {
+                @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+            }
+            .progress-bar {
+                @apply h-2 rounded-full overflow-hidden bg-gray-200;
+            }
+            .progress-value {
+                @apply h-full transition-all duration-700 ease-out;
+            }
+            .cve-container {
+                @apply bg-gray-50 rounded-lg p-4 border border-gray-200 font-mono text-sm overflow-x-auto;
+            }
+            .collapse-btn {
+                @apply flex items-center justify-between w-full py-2 px-4 bg-gray-100 rounded-t-lg cursor-pointer;
+            }
+            .collapse-content {
+                @apply hidden p-4 bg-gray-50 rounded-b-lg border border-t-0 border-gray-200;
+            }
+            .collapse-content.open {
+                @apply block;
+            }
+            /* 抽屉样式 */
+            .drawer-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+                display: none;
+            }
+            .drawer {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 50%;
+                max-width: 50%;
+                height: 100vh;
+                background-color: white;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+                transition: right 0.3s ease-in-out;
+                overflow-y: auto;
+            }
+            .drawer.open {
+                right: 0;
+            }
+            .drawer-close {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                cursor: pointer;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-inter min-h-screen flex flex-col">
+    <!-- 顶部导航 -->
+    <header class="bg-primary text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-shield text-2xl"></i>
+                <h1 class="text-2xl font-bold">电鳗AI检测套装：蓝队专用</h1>
+            </div>
+            <div class="text-sm opacity-80">
+                <span class="mr-4"><i class="fa fa-calendar-o mr-1"></i> 2025-08-11 14:47:07</span>
+                <span><i class="fa fa-file-text-o mr-1"></i> 安全扫描报告</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- 基本信息 -->
+        <div class="section-card">
+            <h2 class="section-title">
+                <i class="fa fa-info-circle text-primary mr-2"></i>
+                基本信息
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 目标信息 -->
+                <div class="bg-gray-50 p-5 rounded-lg border border-gray-100 transform transition-all duration-300 hover:shadow-md">
+                    <h4 class="font-medium text-dark mb-3 flex items-center">
+                        <i class="fa fa-info-circle text-primary mr-2"></i>
+                        目标信息
+                    </h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <span class="w-24 text-neutral">IP地址：</span>
+                            <span class="font-medium">127.0.0.1</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-24 text-neutral">端口：</span>
+                            <span class="font-medium">默认端口</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 扫描方式 -->
+                <div class="bg-gray-50 p-5 rounded-lg border border-gray-100 transform transition-all duration-300 hover:shadow-md">
+                    <h4 class="font-medium text-dark mb-3 flex items-center">
+                        <i class="fa fa-cogs text-secondary mr-2"></i>
+                        扫描方式
+                    </h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <span class="w-24 text-neutral">扫描框架：</span>
+                            <span class="font-medium">全量扫描</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-24 text-neutral">扫描时间：</span>
+                            <span class="font-medium">2025-08-11 14:47:07</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 检测结果 -->
+                <div class="bg-gray-50 p-5 rounded-lg border border-gray-100 transform transition-all duration-300 hover:shadow-md">
+                    <h4 class="font-medium text-dark mb-3 flex items-center">
+                        <i class="fa fa-exclamation-triangle text-warning mr-2"></i>
+                        检测结果
+                    </h4>
+                    <ul class="list-disc list-inside pl-5">
+                        <li>发现当前Ollama服务存在漏洞风险</li><li>发现当前Ray框架存在漏洞风险</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+                
+        <!-- 风险评估 -->
+        <div class="section-card">
+            <h2 class="section-title">
+                <i class="fa fa-tachometer text-primary mr-2"></i>
+                安全风险评估
+            </h2>
+            <div class="space-y-6">
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="font-medium">CVSS安全评分</span>
+                        <span class="font-bold text-xl text-danger">
+                            9.8分
+                        </span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-value bg-danger" 
+                             style="width: 98.0%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-neutral mt-1">
+                        <span>安全</span>
+                        <span>警告</span>
+                        <span>高风险</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button onclick="document.getElementById('high-risk-details').classList.toggle('open'); document.getElementById('drawer-overlay').style.display = 'block';" 
+                            class="bg-danger/5 rounded-lg p-4 border border-danger/20 hover:bg-danger/10 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-arrow-up text-danger mr-2"></i>
+                            <h4 class="font-medium text-danger">高危漏洞</h4>
+                        </div>
+                        <p class="text-dark font-bold">2 个</p>
+                    </button>
+                    
+                    <button onclick="document.getElementById('medium-risk-details').classList.toggle('open'); document.getElementById('drawer-overlay').style.display = 'block';" 
+                            class="bg-warning/5 rounded-lg p-4 border border-warning/20 hover:bg-warning/10 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-exclamation-triangle text-warning mr-2"></i>
+                            <h4 class="font-medium text-warning">中危漏洞</h4>
+                        </div>
+                        <p class="text-dark font-bold">0 个</p>
+                    </button>
+                    
+                    <button onclick="document.getElementById('low-risk-details').classList.toggle('open'); document.getElementById('drawer-overlay').style.display = 'block';" 
+                            class="bg-success/5 rounded-lg p-4 border border-success/20 hover:bg-success/10 transition-colors">
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-check text-success mr-2"></i>
+                            <h4 class="font-medium text-success">低危漏洞</h4>
+                        </div>
+                        <p class="text-dark font-bold">0 个</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 检测日志 -->
+        <div class="section-card">
+            <h2 class="section-title">
+                <i class="fa fa-file-text text-primary mr-2"></i>
+                检测日志信息
+            </h2>
+            <div class="space-y-2 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:01] [INFO] [llama.cpp框架安全检测] 尝试建立TCP连接
+    TCP连接: 127.0.0.1:50052
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-danger/5 border border-danger/20">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-danger">
+                            <i class="fa fa-times-circle mr-1"></i>
+                            [2025-08-11 14:47:01] [INFO] [llama.cpp框架安全检测] TCP连接结果
+    连接结果: 错误码 111 (0表示成功)
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:01] [ERROR] [llama.cpp框架安全检测] 端口未开放
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:01] [WARNING] [llama.cpp框架安全检测] 服务未响应，跳过检测
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:02] [INFO] [ollama框架安全检测] 发送HEAD请求（检测目标服务是否存在）
+    发起请求连接: HEAD http://127.0.0.1:11434/api/tags
+    请求头内容: {}
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:02] [INFO] [ollama框架安全检测] 目标服务响应
+    响应状态码: 200
+    响应头内容: {'Content-Type': 'application/json; charset=utf-8', 'Date': 'Mon, 11 Aug 2025 06:47:02 GMT', 'Content-Length': '351'}
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:02] [INFO] [ollama框架安全检测] 发送GET请求（检测目标API是否存在）
+    发起请求连接: GET http://127.0.0.1:11434/api/tags
+    请求头内容: {}
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-success/5 border border-success/20">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-success">
+                            <i class="fa fa-check-circle mr-1"></i>
+                            [2025-08-11 14:47:02] [INFO] [ollama框架安全检测] 服务响应成功
+    响应状态码: 200
+    响应头内容: {'Content-Type': 'application/json; charset=utf-8', 'Date': 'Mon, 11 Aug 2025 06:47:02 GMT', 'Content-Length': '351'}
+    响应内容: {"models":[{"name":"deepseek-r1:1.5b","model":"deepseek-r1:1.5b","modified_at":"2025-05-27T17:01:30.941161874+08:00","size":1117322599,"digest":"a42b25d8c10a841bd24724309898ae851466696a7d7f3a0a408b895538ccbc96","details":{"parent_model":"","format":"gguf","family":"qwen2","families":["qwen2"],"parameter_size":"1.8B","quantization_level":"Q4_K_M"}}]}...
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-warning/5 border border-warning/20">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-warning">
+                            <i class="fa fa-exclamation-triangle mr-1"></i>
+                            [2025-08-11 14:47:02] [INFO] [ollama框架安全检测] 发送DELETE请求（检测是否存在未授权检测安全风险）
+    发起请求连接: DELETE http://127.0.0.1:11434/api/delete?model=example_model
+    请求头内容: {'Content-Length': '0'}
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-success/5 border border-success/20">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-success">
+                            <i class="fa fa-check-circle mr-1"></i>
+                            [2025-08-11 14:47:02] [INFO] [ollama框架安全检测] 服务响应成功，检测完成
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:02] [INFO] [ollama框架安全检测] 发送GET请求（检测服务版本）
+    发起请求连接: GET http://127.0.0.1:11434/api/version
+    请求头内容: {}
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-success/5 border border-success/20">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-success">
+                            <i class="fa fa-check-circle mr-1"></i>
+                            [2025-08-11 14:47:02] [INFO] [ollama框架安全检测] 响应成功，已获得服务版本信息
+    响应状态码: 200
+    响应头内容: {'Content-Type': 'application/json; charset=utf-8', 'Date': 'Mon, 11 Aug 2025 06:47:02 GMT', 'Content-Length': '19'}
+    响应内容: {"version":"0.7.1"}...
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:03] [INFO] [torchserve框架安全检测] 发送HEAD请求（检测是否存在目标服务）
+    发起请求连接: HEAD http://127.0.0.1:8080/ping
+    请求头内容: {}
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:03] [ERROR] [torchserve框架安全检测] 未发现目标服务: HTTPConnectionPool(host='127.0.0.1', port=8080): Max retries exceeded with url: /ping (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fdba74a4b30>: Failed to establish a new connection: [Errno 111] Connection refused'))
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:04] [INFO] [ray框架安全检测] 发送GET请求（检测目标服务是否存在）
+    发起请求连接: GET http://127.0.0.1:8265/
+    请求头内容: {}
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-success/5 border border-success/20">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-success">
+                            <i class="fa fa-check-circle mr-1"></i>
+                            [2025-08-11 14:47:04] [INFO] [ray框架安全检测] 响应成功，发现存在目标服务
+    响应状态码: 200
+    响应头内容: {'Cache-Control': 'no-cache', 'Content-Type': 'text/html', 'Etag': '"1849b08a61194966-1be"', 'Last-Modified': 'Tue, 17 Jun 2025 01:33:59 GMT', 'Content-Length': '446', 'Accept-Ranges': 'bytes', 'Date': 'Mon, 11 Aug 2025 06:47:04 GMT', 'Server': 'Python/3.10 aiohttp/3.12.2'}
+    响应内容: <!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="shortcut icon" href="./favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Ray Dashboard</title><script defer="defer" src="./static/js/main.1d49c922.js"></script><link href="./static/css/main.388a904b.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>...
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:04] [INFO] [ray框架安全检测] 提交任务: cc821b44
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-success/5 border border-success/20">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-success">
+                            <i class="fa fa-check-circle mr-1"></i>
+                            [2025-08-11 14:47:04] [INFO] [ray框架安全检测] 任务提交成功 (job_id=raysubmit_4LWVGktj7hnBNRxu)
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:05] [INFO] [vllm] 尝试TCP连接
+    TCP连接: 127.0.0.1:8000
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-danger/5 border border-danger/20">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-danger">
+                            <i class="fa fa-times-circle mr-1"></i>
+                            [2025-08-11 14:47:05] [INFO] [vllm] TCP连接结果
+    连接结果: 错误码 111 (0表示成功)
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:05] [WARNING] [vllm] 服务未响应，跳过检测
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:06] [INFO] [xinference框架安全检测] 发送GET请求（检测是否存在目标服务）
+    发起请求连接: GET http://127.0.0.1:9997/status
+    请求头内容: {}
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 rounded-md mb-2 bg-white">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-dark">
+                            <i class="fa fa-circle-o mr-1"></i>
+                            [2025-08-11 14:47:06] [ERROR] [xinference框架安全检测] 不存在目标服务: HTTPConnectionPool(host='127.0.0.1', port=9997): Max retries exceeded with url: /status (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fdba74a7470>: Failed to establish a new connection: [Errno 111] Connection refused'))
+                        </span>
+                        <span class="text-xs text-neutral opacity-70">
+                            14:47:07
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+
+    <!-- 抽屉与遮罩层 -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <div id="high-risk-details" class="drawer">
+        <span class="drawer-close" onclick="this.parentElement.classList.remove('open'); document.getElementById('drawer-overlay').style.display = 'none';"><i class="fa fa-times"></i></span>
+        <div class="p-6">
+            <h2 class="section-title flex items-center justify-between">
+                <span><i class="fa fa-exclamation-circle text-danger mr-2"></i>高危漏洞详情 (2个)</span>
+                <span class="text-sm text-neutral">2025-08-11 14:47:07</span>
+            </h2>
+            <div class="space-y-4">
+                
+                <button class="collapse-btn" onclick="this.nextElementSibling.classList.toggle('open')">
+            <span class="font-semibold text-lg">Ollama未授权访问</span>
+            <span class="transition-transform duration-300">
+                <i class="fa fa-chevron-down"></i>
+            </span>
+        </button>
+        <div class="collapse-content">
+            <div class="space-y-3">
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">漏洞描述</h4>
+                    <p class="text-gray-600">Ollama API存在未授权访问漏洞，可导致模型删除</p>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">扫描特征</h4>
+                    <p class="text-gray-600 break-words">[2025-08-11 14:47:02] [INFO] [ollama框架安全检测] 服务响应成功，检测完成</p>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">安全建议</h4>
+                    <ul class="text-gray-600 list-disc pl-5">
+                        <li>1. 启用认证机制 2. 避免公网暴露 3. 定期更新版本</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">参考链接</h4>
+                    <a href="https://www.cnvd.org.cn/flaw/show/CNVD-2025-04094" class="text-primary hover:underline" target="_blank">https://www.cnvd.org.cn/flaw/show/CNVD-2025-04094</a>
+                </div>
+            </div>
+        </div>
+        
+                <button class="collapse-btn" onclick="this.nextElementSibling.classList.toggle('open')">
+            <span class="font-semibold text-lg">RAY框架远程命令执行漏洞</span>
+            <span class="transition-transform duration-300">
+                <i class="fa fa-chevron-down"></i>
+            </span>
+        </button>
+        <div class="collapse-content">
+            <div class="space-y-3">
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">漏洞描述</h4>
+                    <p class="text-gray-600">Ray存在远程命令执行漏洞，可通过任务提交实现</p>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">扫描特征</h4>
+                    <p class="text-gray-600 break-words">[2025-08-11 14:47:04] [INFO] [ray框架安全检测] 响应成功，发现存在目标服务
+    响应状态码: 200
+    响应头内容: {'Cache-Control': 'no-cache', 'Content-Type': 'text/html', 'Etag': '"1849b08a61194966-1be"', 'Last-Modified': 'Tue, 17 Jun 2025 01:33:59 GMT', 'Content-Length': '446', 'Accept-Ranges': 'bytes', 'Date': 'Mon, 11 Aug 2025 06:47:04 GMT', 'Server': 'Python/3.10 aiohttp/3.12.2'}
+    响应内容: <!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="shortcut icon" href="./favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Ray Dashboard</title><script defer="defer" src="./static/js/main.1d49c922.js"></script><link href="./static/css/main.388a904b.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>...[2025-08-11 14:47:04] [INFO] [ray框架安全检测] 提交任务: cc821b44[2025-08-11 14:47:04] [INFO] [ray框架安全检测] 任务提交成功 (job_id=raysubmit_4LWVGktj7hnBNRxu)</p>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">安全建议</h4>
+                    <ul class="text-gray-600 list-disc pl-5">
+                        <li>1. 启用认证 2. 限制网络访问 3. 定期更新</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">参考链接</h4>
+                    <a href="https://cve.imfht.com/detail/CVE-2023-48022" class="text-primary hover:underline" target="_blank">https://cve.imfht.com/detail/CVE-2023-48022</a>
+                </div>
+            </div>
+        </div>
+        
+            </div>
+        </div>
+    </div>
+    <div id="medium-risk-details" class="drawer">
+        <span class="drawer-close" onclick="this.parentElement.classList.remove('open'); document.getElementById('drawer-overlay').style.display = 'none';"><i class="fa fa-times"></i></span>
+        <div class="p-6">
+            <h2 class="section-title flex items-center justify-between">
+                <span><i class="fa fa-exclamation-triangle text-warning mr-2"></i>中危漏洞详情 (0个)</span>
+                <span class="text-sm text-neutral">2025-08-11 14:47:07</span>
+            </h2>
+            <div class="space-y-4">
+                <p class="text-neutral py-4">未发现中危漏洞</p>
+            </div>
+        </div>
+    </div>
+    <div id="low-risk-details" class="drawer">
+        <span class="drawer-close" onclick="this.parentElement.classList.remove('open'); document.getElementById('drawer-overlay').style.display = 'none';"><i class="fa fa-times"></i></span>
+        <div class="p-6">
+            <h2 class="section-title flex items-center justify-between">
+                <span><i class="fa fa-info-circle text-success mr-2"></i>低危漏洞详情 (0个)</span>
+                <span class="text-sm text-neutral">2025-08-11 14:47:07</span>
+            </h2>
+            <div class="space-y-4">
+                <p class="text-neutral py-4">未发现低危漏洞</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm opacity-80">安全扫描报告 &copy; 2025 北京模湖智能科技有限公司</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fa fa-shield"></i> 安全中心
+                    </a>
+                    <a href="#" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fa fa-question-circle"></i> 帮助
+                    </a>
+                    <a href="#" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fa fa-envelope"></i> 联系我们
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 交互脚本 -->
+    <script>
+        
+    document.addEventListener('DOMContentLoaded', function() {
+        // 卡片动画
+        const cards = document.querySelectorAll('.section-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(10px)';
+            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100 * index);
+        });
+
+        // 进度条动画
+        const progressBars = document.querySelectorAll('.progress-value');
+        progressBars.forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0';
+            setTimeout(() => {
+                bar.style.width = width;
+            }, 300);
+        });
+
+        // 抽屉式弹窗控制
+        const drawerButtons = document.querySelectorAll('[onclick*="classList.toggle('open')"]');
+        drawerButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                // 阻止事件冒泡到文档
+                e.stopPropagation();
+            });
+        });
+
+        // 关闭按钮和遮罩层点击事件
+        document.getElementById('drawer-overlay').addEventListener('click', closeAllDrawers);
+        document.querySelectorAll('.drawer-close').forEach(button => {
+            button.addEventListener('click', closeAllDrawers);
+        });
+
+        function closeAllDrawers() {
+            document.getElementById('drawer-overlay').style.display = 'none';
+            document.querySelectorAll('.drawer').forEach(drawer => {
+                drawer.classList.remove('open');
+            });
+        }
+    });
+    
+    </script>
+</body>
+</html>
