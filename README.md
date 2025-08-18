@@ -20,6 +20,8 @@
 ## 简介
 电鳗 AI 检测套装是一款专注于 AI 框架的自动化安全检测工具集，深度聚焦 AI 框架特有的安全风险场景，可快速识别AI供应链漏洞的高危漏洞，提供针对性修复建议与安全加固方案。
 
+[![Demo 视频](https://i0.hdslb.com/bfs/archive/4ac3afcdfadf211aa9fc90906527a3a1b4f326b2.jpg)](https://player.bilibili.com/player.html?isOutside=true&aid=115049154744306&bvid=BV1DjYszWEnB&cid=31778802845&p=1)
+
 
 ### 🌟 核心特性
 - **AI 框架原生适配**：基于 AI 框架底层通信协议（如 RPC/REST API）和内存管理机制，定制化检测逻辑，而非通用网络扫描
